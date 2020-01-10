@@ -10,4 +10,4 @@ function countChar(str, character) {
 	return count;
 }
 
-console.log(countBs('BoBoBigBoobsBananaSwallower'));
+console.log(countBs('BaBaBlackSheep'));
