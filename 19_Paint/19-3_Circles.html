@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="19_paint.js"></script>
+
+<div></div>
+<script>
+  function distance(a, b) {
+    return Math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2);
+  }
+
+  function circle(start, state, dispatch) {
+    console.log(start, state, dispatch);
+    const w = state.picture.width,
+          h = state.picture.height,
+			    x0 = start.x,
+			    y0 = start.y;
+    function drawCircle(pos) {
+      console.log(pos);
+      let drawn = [];
+      let r = Math.round(distance(start, pos));
+      for (let y = Math.max(0, y0 - r); y < Math.min(h, y0 + r); y++) {
+        for (let x = Math.max(0, x0 - r); x < Math.min(w, x0 + r); x++) {
+          let point = {x: x, y: y};
+          if (distance(point, start) < r) {
+            drawn.push({x, y, color: state.color});
+          }
+        }
+      }
+      dispatch({picture: state.picture.draw(drawn)});
+    }
+    drawCircle(start);
+    return drawCircle;
+
+  }
+
+  let dom = startPixelEditor({
+    tools: Object.assign({}, baseTools, {circle})
+  });
+  document.querySelector("div").appendChild(dom);
+</script>

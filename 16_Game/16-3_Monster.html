@@ -1,0 +1,84 @@
+<!doctype html>
+<script src="code/16_game.js"></script>
+<script src="code/levels.js"></script>
+
+<link rel="stylesheet" href="css/game.css">
+
+<style>
+	.monster { background: purple }
+</style>
+
+<body>
+	<script>
+		const monsterSpeed = 4;
+
+		class Monster {
+			constructor(pos, speed = new Vec(0, 0)) {
+				this.pos = pos;
+				this.speed = speed;
+			}
+
+			get type() { return "monster"; }
+
+			static create(pos, speed) {
+				return new Monster(pos.plus(new Vec(0, -1)), new Vec(0, 0));
+			}
+
+			update(time, state) {
+				let player = state.player;
+				
+				let ySpeed = this.speed.y + time * gravity;
+				let dY = ySpeed * time;
+				let movedY = this.pos.plus(new Vec(0, dY));
+				if (!state.level.touches(movedY, this.size, "wall")) {
+					this.pos.y = movedY.y;
+				} else {
+					this.pos.y = Math.ceil(this.pos.y);
+				}
+				
+				let xSpeed = (player.pos.x < this.pos.x ? -1 : 1) * monsterSpeed;
+				let dX = xSpeed * time;
+				let movedX = this.pos.plus(new Vec(dX, 0));
+				if (!state.level.touches(movedX, this.size, "wall")) {
+					this.pos.x = movedX.x;
+				} else if (xSpeed < 0) {
+					this.pos.x = Math.floor(this.pos.x);
+				} else {
+					this.pos.x = Math.ceil(this.pos.x) - (this.size.x * 10 % 10) / 10;
+				}
+				
+				let newPos = new Vec(this.pos.x, this.pos.y);
+				return new Monster(newPos, new Vec(xSpeed, ySpeed));
+			}
+
+			collide(state) {
+				let player = state.player;
+				if (player.pos.y + player.size.y < this.pos.y + 0.5) {
+					let filtered = state.actors.filter(a => a != this);
+					return new State(state.level, filtered, state.status);
+				} else {
+					return new State(state.level, state.actors, "lost");
+				}
+			}
+		}
+
+		Monster.prototype.size = new Vec(1.2, 2);
+
+		levelChars["M"] = Monster;
+
+		runLevel(new Level(`
+..................................
+.################################.
+.#..............................#.
+.#..............................#.
+.#..............................#.
+.#...........................o..#.
+.#..@........................M..#.
+.##########..............########.
+..........#..o..o..o..o..#........
+..........#...........M..#........
+..........################........
+..................................
+`), DOMDisplay);
+	</script>
+</body>

@@ -1,0 +1,52 @@
+<!doctype html>
+<style>
+	div {
+		border: 1px solid lightgray;
+		border-top: none;
+	}
+	button {
+		border-radius: 5px 5px 0 0;
+	}
+</style>
+
+<tab-panel>
+	<div data-tabname="one">Tab one</div>
+	<div data-tabname="two">Tab two</div>
+	<div data-tabname="three">Tab three</div>
+</tab-panel>
+<script>
+	function asTabs(node) {
+		const children = Array.from(node.children);
+		const top = children[0];
+		for (let child of children) {
+			let button = document.createElement("button");
+			button.textContent = child.getAttribute("data-tabname");
+			node.insertBefore(button, top);
+			button.addEventListener("click", (event) => {
+				children.forEach(c => c.style.display = "none");
+				child.style.display = "block";
+			});
+		}
+		
+		let buttons = Array.from(node.querySelectorAll("button"));
+		for (let button of buttons) {
+			button.style.background = "#eee";
+			button.style.width = 100 / buttons.length + "%";
+			button.addEventListener("click", (event) => {
+				buttons.forEach(b => {
+					b.style.borderBottom = "1px solid lightgray";
+					b.style.background = "#eee";
+				});
+				button.style.borderBottom = "none";
+				button.style.background = "transparent";
+			});
+		}
+		
+		children.forEach(c => c.style.display = "none");
+		top.style.display = "block";
+		buttons[0].style.borderBottom = "none";
+		buttons[0].style.background = "transparent";
+	}
+	
+	asTabs(document.querySelector("tab-panel"));
+</script>

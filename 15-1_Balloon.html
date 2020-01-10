@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		p {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 500px;
+		}
+	</style>
+</head>
+<body>
+	<p style="font-size: 24px">🎈</p>
+	
+	<script>
+		let p = document.querySelector("p");
+		let size = Number(p.style.fontSize.match(/^\d+/));
+		
+		window.addEventListener("keydown", resize);
+		
+		function resize(event) {
+			event.preventDefault();
+			if (event.key == "ArrowUp") {
+				if (size >= 100) {
+					p.innerHTML = "💥";
+					window.removeEventListener("keydown", resize);
+				} else {
+					size *= 1.1;
+					p.style.fontSize = size + "px";
+				}
+			} else if (event.key == "ArrowDown") {
+				size -= 0.1 * size;
+				p.style.fontSize = size + "px";
+			}
+		};
+	</script>
+</body>
+</html>

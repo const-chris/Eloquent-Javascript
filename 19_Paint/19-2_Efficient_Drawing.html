@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="19_paint.js"></script>
+
+<div></div>
+<script>
+  function pixels(picture) {
+    let pixelArray = [];
+    for (let y = 0; y < picture.height; y++) {
+      for (let x = 0; x < picture.width; x++) {
+        pixelArray.push([x, y]);
+      }
+    }
+    return pixelArray;
+  }
+
+  function updatePixel(x, y, picture, context) {
+    context.fillStyle = picture.pixel(x, y);
+    context.fillRect(x * scale, y * scale, scale, scale);
+  }
+
+  PictureCanvas.prototype.syncState = function(picture) {
+    if (this.picture == picture) return;
+    if (!this.picture) {
+      this.picture = picture;
+      drawPicture(this.picture, this.dom, scale);
+      return;
+    }
+    for (let [x, y] of pixels(picture)) {
+      if (this.picture.pixel(x, y) != picture.pixel(x, y)) {
+        updatePixel(x, y, picture, this.dom.getContext("2d"));
+      }
+    }
+    this.picture = picture;
+  };
+
+  function drawPicture(picture, canvas, scale) {
+    canvas.width = picture.width * scale;
+    canvas.height = picture.height * scale;
+
+    for (let [x, y] of pixels(picture)) {
+      updatePixel(x, y, picture, canvas.getContext("2d"));
+    }
+  }
+
+  document.querySelector("div")
+    .appendChild(startPixelEditor({}));
+</script>

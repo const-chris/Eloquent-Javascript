@@ -1,0 +1,57 @@
+<!doctype html>
+
+<style>
+	.trail { /* className for the trail elements */
+		position: absolute;
+		top: -100px;
+		height: 16px; width: 16px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 70%, white, cyan, darkcyan, white);
+		box-shadow: -2px 0px 6px 0px darkgray;
+		transition: opacity 300ms;
+	}
+	body {
+		height: 300px;
+	}
+</style>
+
+<script>
+	const numTrails = 10;
+	
+	for (let i = 0; i < numTrails; i++) {
+		let trail = document.createElement("div");
+		trail.classList.add("trail");
+		document.body.appendChild(trail);
+	}
+	
+	let trails = Array.from(document.querySelectorAll(".trail"));
+	let time, timeSinceLastMove;
+	let events = [];
+	
+	window.addEventListener("mousemove", (event) => {
+		time = event.timeStamp;
+		events.push(event);
+		for (let i = 0; i < trails.length; i++) {
+			try {
+				trails[i].style.top = events[events.length - 1 - i].clientY + "px";
+				trails[i].style.left = events[events.length - 1 - i].clientX + "px";
+			} catch (e) {
+				if (e instanceof TypeError) {}
+				else throw e;
+			}
+			if (i > 0) trails[i].style.opacity = 1 / i;
+			else trails[i].style.opacity = 1;
+		}
+	});
+	
+	const intervalID = window.setInterval(myCallback, 50);
+	
+	function myCallback() {
+		timeSinceLastMove = performance.now() - time;
+		if (timeSinceLastMove >= 80) {
+			for (let trail of trails) {
+				trail.style.opacity = "0";
+			}
+		}
+	}
+</script>

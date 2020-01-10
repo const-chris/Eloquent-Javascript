@@ -1,0 +1,75 @@
+<!doctype html>
+<script src="code/chapter/18_http.js"></script>
+
+<div id="grid"></div>
+<button id="next">Next generation</button>
+
+<script>
+	// Your code here.
+	const w = 5, h = 5;
+	for (let i = 0; i < w; i++) {
+		let row = document.createElement("div");
+		row.setAttribute("id", i);
+		for (let i = 0; i < h; i++) {
+			let cell = document.createElement("input");
+			cell.setAttribute("type", "checkbox");
+			cell.setAttribute("class", "cell");
+			if (Math.random() > 0.5) {
+				cell.setAttribute("checked", "true");
+			}
+			row.appendChild(cell);
+		}
+		document.body.appendChild(row);
+	}
+	
+	let state = setState();
+	
+	function setState() {
+		let state = [];
+		let cells = document.querySelectorAll(".cell");
+		for (let cell of Array.from(cells)) {
+			state.push(cell.hasAttribute("checked"));
+		}
+		return state;
+	}
+
+	const button = document.querySelector("#next");
+	button.addEventListener("click", () => state = update(state));
+	
+	function update(state) {
+		let cells = Array.from(document.querySelectorAll(".cell"))
+		for (cell of cells) {
+			let i = cells.indexOf(cell);
+			let positions = {
+				"left": i-1, "right": i+1,
+				"topleft": i-6, "top": i-5, "topright": i-4,
+				"bottomleft": i+4, "bottom": i+5, "bottomright": i+6
+			};
+			let neighbors = Object.keys(positions);
+			let liveNeighbors = 0;
+			
+			let topEdge = i <= w;
+			let rightEdge = (i + 1) % w == 0;
+			let bottomEdge = i >= w * (h - 1);
+			let leftEdge = i % w == 0;
+			
+			if (topEdge) neighbors = neighbors.filter(n => !n.includes("top"));
+			if (rightEdge) neighbors = neighbors.filter(n => !n.includes("right"));
+			if (bottomEdge) neighbors = neighbors.filter(n => !n.includes("bottom"));
+			if (leftEdge) neighbors = neighbors.filter(n => !n.includes("left"));
+
+			for (let neighbor of neighbors) {
+				let neighborPosition = positions[neighbor];
+				if (state[neighborPosition]) liveNeighbors++;
+			}
+			let checked = cell.hasAttribute("checked");
+			if (!checked) {
+				if (liveNeighbors == 3) cell.setAttribute("checked", "true");
+			} else if (liveNeighbors < 2 || liveNeighbors > 4) {
+				cell.removeAttribute("checked");
+			}
+		}
+		
+		return setState();
+	}
+</script>

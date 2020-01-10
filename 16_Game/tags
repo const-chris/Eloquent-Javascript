@@ -1,0 +1,51 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Coin	code/16_game.js	/^Coin.prototype.size = new Vec(0.6, 0.6);$/;"	c
+Coin.collide	code/16_game.js	/^Coin.prototype.collide = function(state) {$/;"	m
+Coin.size	code/16_game.js	/^Coin.prototype.size = new Vec(0.6, 0.6);$/;"	m
+Coin.update	code/16_game.js	/^Coin.prototype.update = function(time) {$/;"	m
+DOMDisplay	code/16_game.js	/^DOMDisplay.prototype.syncState = function(state) {$/;"	c
+DOMDisplay.scrollPlayerIntoView	code/16_game.js	/^DOMDisplay.prototype.scrollPlayerIntoView = function(state) {$/;"	m
+DOMDisplay.syncState	code/16_game.js	/^DOMDisplay.prototype.syncState = function(state) {$/;"	m
+GAME_LEVELS	code/levels.js	/^var GAME_LEVELS = [`                                                    $/;"	v
+Lava	code/16_game.js	/^Lava.prototype.size = new Vec(1, 1);$/;"	c
+Lava.collide	code/16_game.js	/^Lava.prototype.collide = function(state) {$/;"	m
+Lava.size	code/16_game.js	/^Lava.prototype.size = new Vec(1, 1);$/;"	m
+Lava.update	code/16_game.js	/^Lava.prototype.update = function(time, state) {$/;"	m
+Level	code/16_game.js	/^Level.prototype.touches = function(pos, size, type) {$/;"	c
+Level.touches	code/16_game.js	/^Level.prototype.touches = function(pos, size, type) {$/;"	m
+Player	code/16_game.js	/^Player.prototype.size = new Vec(0.8, 1.5);$/;"	c
+Player.size	code/16_game.js	/^Player.prototype.size = new Vec(0.8, 1.5);$/;"	m
+Player.update	code/16_game.js	/^Player.prototype.update = function(time, state, keys) {$/;"	m
+State	code/16_game.js	/^State.prototype.update = function(time, keys) {$/;"	c
+State.update	code/16_game.js	/^State.prototype.update = function(time, keys) {$/;"	m
+drawActors	code/16_game.js	/^function drawActors(actors) {$/;"	f
+drawGrid	code/16_game.js	/^function drawGrid(level) {$/;"	f
+elt	code/16_game.js	/^function elt(name, attrs, ...children) {$/;"	f
+gravity	code/16_game.js	/^var gravity = 30;$/;"	v
+jumpSpeed	code/16_game.js	/^var jumpSpeed = 17;$/;"	v
+levelChars.#	code/16_game.js	/^  ".": "empty", "#": "wall", "+": "lava",$/;"	p
+levelChars.+	code/16_game.js	/^  ".": "empty", "#": "wall", "+": "lava",$/;"	p
+levelChars..	code/16_game.js	/^  ".": "empty", "#": "wall", "+": "lava",$/;"	p
+levelChars.=	code/16_game.js	/^  "=": Lava, "|": Lava, "v": Lava$/;"	p
+levelChars.@	code/16_game.js	/^  "@": Player, "o": Coin,$/;"	p
+levelChars.o	code/16_game.js	/^  "@": Player, "o": Coin,$/;"	p
+levelChars.v	code/16_game.js	/^  "=": Lava, "|": Lava, "v": Lava$/;"	p
+levelChars.|	code/16_game.js	/^  "=": Lava, "|": Lava, "v": Lava$/;"	p
+overlap	code/16_game.js	/^function overlap(actor1, actor2) {$/;"	f
+playerXSpeed	code/16_game.js	/^var playerXSpeed = 7;$/;"	v
+runAnimation	code/16_game.js	/^function runAnimation(frameFunc) {$/;"	f
+runAnimation.frame	code/16_game.js	/^  function frame(time) {$/;"	f
+runLevel	16-2_Pausing_the_Game.html	/^  function runLevel(level, Display) {$/;"	f
+runLevel	code/16_game.js	/^function runLevel(level, Display) {$/;"	f
+scale	code/16_game.js	/^var scale = 20;$/;"	v
+simpleLevelPlan	code/16_game.js	/^var simpleLevelPlan = `$/;"	v
+track	16-2_Pausing_the_Game.html	/^    function track(event) {$/;"	f
+trackKeys	16-2_Pausing_the_Game.html	/^  function trackKeys(keys) {$/;"	f
+trackKeys	code/16_game.js	/^function trackKeys(keys) {$/;"	f
+trackKeys.track	code/16_game.js	/^  function track(event) {$/;"	f
+wobbleSpeed	code/16_game.js	/^var wobbleSpeed = 8, wobbleDist = 0.07;$/;"	v

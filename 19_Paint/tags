@@ -1,0 +1,43 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+PictureCanvas	19_paint.js	/^PictureCanvas.prototype.mouse = function(downEvent, onDown) {$/;"	c
+PictureCanvas.mouse	19_paint.js	/^PictureCanvas.prototype.mouse = function(downEvent, onDown) {$/;"	m
+PictureCanvas.touch	19_paint.js	/^PictureCanvas.prototype.touch = function(startEvent,$/;"	m
+baseControls	19_paint.js	/^var baseControls = [$/;"	v
+circle	19-3_Circles.html	/^  function circle(start, state, dispatch) {$/;"	f
+connectDots	19-4_Proper_Lines.html	/^  function connectDots(start, pos, state) {$/;"	f
+distance	19-3_Circles.html	/^  function distance(a, b) {$/;"	f
+distance	19-4_Proper_Lines.html	/^  function distance(a, b) {$/;"	f
+draw	19-4_Proper_Lines.html	/^  function draw(pos, state, dispatch) {$/;"	f
+draw	19_paint.js	/^function draw(pos, state, dispatch) {$/;"	f
+draw.drawPixel	19_paint.js	/^  function drawPixel({x, y}, state) {$/;"	f
+draw.let.color	19_paint.js	/^    let drawn = {x, y, color: state.color};$/;"	p
+drawCircle	19-3_Circles.html	/^    function drawCircle(pos) {$/;"	f
+drawLine	19-4_Proper_Lines.html	/^    function drawLine(pos) {$/;"	f
+drawPicture	19-2_Efficient_Drawing.html	/^  function drawPicture(picture, canvas, scale) {$/;"	f
+drawPicture	19_paint.js	/^function drawPicture(picture, canvas, scale) {$/;"	f
+drawPixel	19-4_Proper_Lines.html	/^    function drawPixel(pos, state) {$/;"	f
+elt	19_paint.js	/^function elt(type, props, ...children) {$/;"	f
+fill	19_paint.js	/^function fill({x, y}, state, dispatch) {$/;"	f
+finishLoad	19_paint.js	/^function finishLoad(file, dispatch) {$/;"	f
+hex	19_paint.js	/^  function hex(n) {$/;"	f
+historyUpdateState	19_paint.js	/^function historyUpdateState(state, action) {$/;"	f
+line	19-4_Proper_Lines.html	/^  function line(start, state, dispatch) {$/;"	f
+pick	19_paint.js	/^function pick(pos, state, dispatch) {$/;"	f
+pictureFromImage	19_paint.js	/^function pictureFromImage(image) {$/;"	f
+pixels	19-2_Efficient_Drawing.html	/^  function pixels(picture) {$/;"	f
+pointerPosition	19_paint.js	/^function pointerPosition(pos, domNode) {$/;"	f
+rectangle	19_paint.js	/^function rectangle(start, state, dispatch) {$/;"	f
+rectangle.drawRectangle	19_paint.js	/^  function drawRectangle(pos) {$/;"	f
+scale	19_paint.js	/^var scale = 10;$/;"	v
+startLoad	19_paint.js	/^function startLoad(dispatch) {$/;"	f
+startPixelEditor	19_paint.js	/^function startPixelEditor({state = startState,$/;"	f
+startState.color	19_paint.js	/^  color: "#000000",$/;"	p
+startState.picture	19_paint.js	/^  picture: Picture.empty(60, 30, "#f0f0f0"),$/;"	p
+startState.tool	19_paint.js	/^  tool: "draw",$/;"	p
+updatePixel	19-2_Efficient_Drawing.html	/^  function updatePixel(x, y, picture, context) {$/;"	f
+updateState	19_paint.js	/^function updateState(state, action) {$/;"	f

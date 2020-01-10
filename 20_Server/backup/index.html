@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="script.js" defer></script>
+	<link rel="stylesheet" href="style.css">
+	<title></title>
+</head>
+<body>
+	<h1>Hello Internet</h1>
+	<div>
+		<label for="file-select">Choose a file to edit:</label>
+		<select id="file-select" name="file-select">
+			<option value="script.js">JS</option>
+			<option value="style.css">CSS</option>
+		</select>
+		<label for="script">Edit the script file for this page:</label>
+		<textarea id="script" name="script" cols="80" rows="20"></textarea>
+		<button>Submit</button>
+	</div>
+	<script>
+		let textarea = document.querySelector('textarea');
+		fetch(sessionStorage.getItem('path') ||
+		      'http://localhost:8000/script.js')
+		.then(r => r.text())
+		.then(text => {
+			textarea.textContent = text;
+		});
+
+		let select = document.querySelector('#file-select');
+		let path;
+		select.addEventListener('change', (event) => {
+			path = `http://localhost:8000/${select.value}`;
+			sessionStorage.setItem('path', path);
+			fetch(path)
+				.then(r => r.text())
+				.then(text => textarea.textContent = text)
+		});
+
+		let submit = document.querySelector("button");
+		submit.addEventListener('click', (event) => {
+			event.preventDefault();
+			let request = new XMLHttpRequest();
+			let text = textarea.value;
+			request.open('PUT', path, false);
+			request.send(text);
+			location.reload(true);
+		});
+	</script>
+</body>
+</html>

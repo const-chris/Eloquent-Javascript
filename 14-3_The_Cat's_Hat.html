@@ -1,0 +1,28 @@
+<!doctype html>
+
+<style>body { min-height: 200px }</style>
+<img src="img/cat.png" id="cat" style="position: absolute">
+<img src="img/hat.png" id="hat" style="position: absolute">
+
+<script>
+	let cat = document.querySelector("#cat");
+	let hat = document.querySelector("#hat");
+	
+	const π = Math.PI;
+	let Θ = 0;
+	let lastTime = null;
+	
+	function animate(time) {
+		if (lastTime != null) Θ += (time - lastTime) * 0.001;
+		lastTime = time;
+		cat.style.top = (Math.sin(Θ) * 50 + 70) + "px";
+		cat.style.left = (Math.cos(Θ) * 200 + 250) + "px";
+		
+		let catPos = cat.getBoundingClientRect();
+		hat.style.top = (catPos.top + Math.sin(-Θ * 2 * π) * 60) + "px";
+		hat.style.left = (catPos.left + Math.cos(-Θ * 2 * π) * 60) + "px";
+		
+		requestAnimationFrame(animate);
+	}
+	requestAnimationFrame(animate);
+</script>

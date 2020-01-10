@@ -1,0 +1,79 @@
+<!doctype html>
+<script src="code/chapter/16_game.js"></script>
+<script src="code/levels.js"></script>
+<script src="code/chapter/17_canvas.js"></script>
+
+<canvas width="400" height="400"></canvas>
+<script>
+	let cx = document.querySelector("canvas").getContext("2d");
+
+	let lastTime = null;
+	function frame(time) {
+		if (lastTime != null) {
+			updateAnimation(Math.min(100, time - lastTime) / 1000);
+		}
+		lastTime = time;
+		requestAnimationFrame(frame);
+	}
+	requestAnimationFrame(frame);
+
+	let xO = 10, yO = 10;
+	let w = 380, h = 380;
+	let x = 60, y = 60;
+	let balls = [], numBalls = 20;
+	for (let i = 0; i < numBalls; i++) {
+		let ball = {};
+		ball.x = x;
+		ball.y = y;
+		ball.r = Math.random() * 20 + 3;
+		ball.xSpeed = Math.random() * 800;
+		ball.ySpeed = Math.random() * 800;
+		ball.color = randomColor();
+		balls.push(ball);
+	}
+
+	function updateAnimation(step) {
+		cx.clearRect(0, 0, 400, 400);
+		cx.lineWidth = 4;
+		cx.strokeRect(10, 10, w, h);
+		cx.lineWidth = 1;
+		
+		for (let ball of balls) {
+			let {x, y, r, xSpeed, ySpeed} = ball;
+			let xNext = x + xSpeed * step,
+					yNext = y + ySpeed * step;
+				
+			if (xNext + r >= xO + w && xSpeed > 0) {
+				ball.xSpeed = -xSpeed;
+				ball.x = xO + w - r;
+			} else if (xNext - r <= xO	&& xSpeed < 0) {
+				ball.xSpeed = -xSpeed;
+				ball.x = xO + r;
+			} else {
+				ball.x += xSpeed * step;
+			}
+			if (yNext + r >= yO + h && ySpeed > 0) {
+				ball.ySpeed = -ySpeed;
+				ball.y = yO + h - r;
+			} else if (yNext - r <= yO && ySpeed < 0) {
+				ball.ySpeed = -ySpeed;
+				ball.y = yO + r;
+			} else {
+				ball.y += ySpeed * step;
+			}
+			
+			cx.beginPath();
+			cx.arc(x, y, r, 0, 7);
+			cx.fillStyle = ball.color;
+			cx.fill();
+			cx.stroke();
+		}
+	}
+	
+	function randomColor() {
+			let r = Math.floor(Math.random() * 256);
+			let g = Math.floor(Math.random() * 256);
+			let b = Math.floor(Math.random() * 256);
+			return `rgb(${r}, ${g}, ${b})`;
+	}
+</script>

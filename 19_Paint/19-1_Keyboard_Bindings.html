@@ -1,0 +1,50 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="19_paint.js"></script>
+
+<div></div>
+<script>
+	console.log("hello");
+  PixelEditor = class PixelEditor {
+    constructor(state, config) {
+      let {tools, controls, dispatch} = config;
+      this.state = state;
+
+      this.canvas = new PictureCanvas(state.picture, pos => {
+        let tool = tools[this.state.tool];
+        let onMove = tool(pos, this.state, dispatch);
+        if (onMove) {
+          return pos => onMove(pos, this.state, dispatch);
+        }
+      });
+
+      this.controls = controls.map(
+        Control => new Control(state, config));
+
+      this.dom = elt("div", { tabIndex: 0 }, this.canvas.dom, elt("br"),
+                     ...this.controls.reduce(
+                       (a, c) => a.concat(" ", c.dom), []));
+      this.dom.addEventListener("keydown", event => {
+        if (event.metaKey && event.key == "z") {
+          this.controls[4].dom.click();
+          event.preventDefault();
+        } else {
+          if      (event.key == "d") state.tool = "draw";
+          else if (event.key == "f") state.tool = "fill";
+          else if (event.key == "p") state.tool = "pick";
+          else if (event.key == "r") state.tool = "rectangle";
+          this.controls[0].syncState(state);
+        }
+      });
+    }
+
+    syncState(state) {
+      this.state = state;
+      this.canvas.syncState(state.picture);
+      for (let ctrl of this.controls) ctrl.syncState(state);
+    }
+  }
+
+  document.querySelector("div")
+    .appendChild(startPixelEditor({}));
+</script>

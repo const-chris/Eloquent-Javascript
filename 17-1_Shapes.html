@@ -1,0 +1,81 @@
+<!doctype html>
+<script src="code/chapter/16_game.js"></script>
+<script src="code/levels.js"></script>
+<script src="code/chapter/17_canvas.js"></script>
+
+<canvas width="800" height="200"></canvas>
+<script>
+	let cx = document.querySelector("canvas").getContext("2d");
+
+	// Your code here.
+
+function drawShape(shape, shapeArgs, posX, posY) {
+	cx.save();
+	cx.translate(posX, posY);
+	shape(...shapeArgs);
+	cx.restore();
+}
+
+function trapezoid(height, base, runL, runR) {
+	cx.beginPath();
+	cx.moveTo(-base/2 + runL, -height/2);
+	cx.lineTo(-base/2, height/2);
+	cx.lineTo(base/2, height/2);
+	cx.lineTo(base/2 - runR, -height/2);
+	cx.closePath();
+	cx.stroke();
+}
+
+drawShape(trapezoid, [50, 100, 25, 25], 75, 75);
+
+function diamond(side) {
+	cx.beginPath();
+	cx.rotate(Math.PI / 4);
+	cx.fillStyle = "red";
+	cx.fillRect(-side/2, -side/2, side, side);
+	cx.strokeRect(-side/2, -side/2, side, side);
+}
+
+drawShape(diamond, [60], 200, 75);
+	
+function zigzag(rise, run, repeats) {
+	let y = rise;
+	for (let i = 0; i < repeats; i++) {
+		let x = i % 2 == 0 ? 0 : run;
+		y += 8;
+		cx.lineTo(x, y);
+	}
+	cx.stroke();
+}
+
+drawShape(zigzag, [30, 100, 11], 280, 0);
+
+function spiral(segments, inc, rotation) {
+	cx.beginPath();
+	let startX = 0, startY = 0;
+	for (let i = 0; i < segments; i++) {
+		cx.rotate(Math.PI/rotation);
+		cx.lineTo(startX + inc, startY + inc);
+		startX = startX + inc, startY = startY + inc;
+	}
+	cx.stroke();
+}
+
+drawShape(spiral, [200, 0.2, 24], 470, 75);
+	
+function star(points, r) {
+	cx.beginPath();
+	cx.fillStyle = "yellow";
+	const pi = Math.PI, θ = 2*pi/points;
+	cx.moveTo(r, 0);
+	for (let i = 0; i < 2*pi/θ; i++) {
+		cx.quadraticCurveTo(0, 0, r * Math.cos(θ), r * Math.sin(θ));
+		cx.rotate(θ);
+		moveTo(0, 0);
+	}
+	cx.fill();
+	cx.stroke();
+}
+
+drawShape(star, [8, 45], 600, 75);
+</script>
